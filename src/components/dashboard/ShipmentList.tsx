@@ -1,9 +1,7 @@
-import React, { lazy, useCallback, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { Shipment } from "./types";
 import ShipmentDetailsField from "./ShipmentDetailsField";
-
-const TrackingForm = lazy(() => import("./TrackingForm"));
-
+import TrackingForm from "./TrackingForm";
 interface ShipmentListProps {
   shipments: Array<Shipment>;
   onUpdateTracking: () => void;
@@ -67,7 +65,7 @@ const ShipmentList: React.FC<ShipmentListProps> = ({
             />
             {selectedShipment === shipment._id ? (
               <TrackingForm
-                trackingDetailsId={shipment.trackingDetails[0]._id}
+                trackingDetailsId={shipment.trackingDetails?.[0]?._id}
                 onUpdate={() => {
                   onUpdateTracking();
                   setSelectedShipment(null);

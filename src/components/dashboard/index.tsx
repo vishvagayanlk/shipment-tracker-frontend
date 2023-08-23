@@ -1,18 +1,14 @@
 import { useState, useEffect, lazy, useCallback, FC } from "react";
 import ShipmentList from "./ShipmentList";
-import { useNavigate } from "react-router-dom";
 import { Shipment } from "./types";
-import Banner from "../../services/Banner";
-import { useAuth } from "../../hooks/useAuth";
 import useApi from "../../hooks/useApi";
+import Logout from "../auth/logout";
 
 const ShipmentForm = lazy(() => import("./ShipmentForm"));
 
 const Dashboard: FC = () => {
   const [shipments, setShipments] = useState<Array<Shipment>>([]);
   const [showForm, setShowForm] = useState<boolean>(false);
-  const { logout } = useAuth();
-  const navigate = useNavigate();
   const { isLoading, data, makeApiCall } = useApi<Array<Shipment>>();
 
   useEffect(() => {
@@ -39,16 +35,6 @@ const Dashboard: FC = () => {
     setShowForm((prevShowForm) => !prevShowForm);
   }, []);
 
-  const onClickLogout = async () => {
-    try {
-      makeApiCall("/auth/logout", { method: "GET" });
-      logout();
-      navigate("/");
-    } catch (error) {
-      return <Banner type={"ERROR"} message={`Error while logins out`} />;
-    }
-  };
-
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-semibold mb-4">Welcome to Dashboard</h1>
@@ -59,12 +45,7 @@ const Dashboard: FC = () => {
         >
           Create Shipment
         </button>
-        <button
-          onClick={onClickLogout}
-          className="bg-red-500 text-white px-4 py-2 rounded"
-        >
-          Logout
-        </button>
+        <Logout />
       </div>
       {showForm ? (
         <ShipmentForm
