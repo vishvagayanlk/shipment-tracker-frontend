@@ -45,7 +45,7 @@ describe("LoginForm", () => {
         makeApiCall: mockMakeApiCall,
       })),
     }));
-    const { getByTestId, getByRole } = render(
+    const { getByTestId } = render(
       <AuthProvider>
         <MemoryRouter></MemoryRouter>
       </AuthProvider>,

@@ -11,7 +11,7 @@ This repository contains the frontend code for the React project. Follow the ins
 1. Clone this repository to your local machine:
 
    ```sh
-   git clone https://github.com/your-username/react-frontend.git
+   git clone https://github.com:vishvagayanlk/shipment-tracker-frontend.git
    cd react-frontend `
 
    ```
